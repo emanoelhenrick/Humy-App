@@ -8,7 +8,6 @@ import { updateDevices } from "../../storage/devices/storageUpdateDevices";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { formatDistance } from "date-fns";
 import { ptBR } from "date-fns/locale";
-// import { monitoredDevices } from "../../storage/fakeDevices";
 
 export function Home() {
 
