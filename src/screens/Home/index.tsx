@@ -3,42 +3,43 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { AddDevice, Container, Device, DeviceContainer, DeviceName, EmptyList, Header, HumPercent, LastVerification, Percent, SecondHeader, Subtitle, Title} from "./styles";
 import { StorageData, getAllDevices } from "../../storage/devices/storageGetAllDevices";
 import { useCallback, useState } from "react";
-// import { clearAllDevices } from "../../storage/devices/storageAddDevice";
-import { formatDistance } from "date-fns";
-import { ptBR } from 'date-fns/locale'
+import { clearAllDevices } from "../../storage/devices/storageAddDevice";
 import { updateDevices } from "../../storage/devices/storageUpdateDevices";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { formatDistance } from "date-fns";
+import { ptBR } from "date-fns/locale";
+// import { monitoredDevices } from "../../storage/fakeDevices";
 
 export function Home() {
 
-  // const [monitoredDevices, setMonitoredDevices] = useState<StorageData[]>([])
+  const [monitoredDevices, setMonitoredDevices] = useState<StorageData[]>([])
 
-  // async function loadAllDevices() {
-  //   await updateDevices()
-  //   const devices = await getAllDevices()
-  //   if (devices) {
-  //     setMonitoredDevices(devices);
-  //   }
-  // }
+  async function loadAllDevices() {
+    await updateDevices()
+    const devices = await getAllDevices()
+    if (devices) {
+      setMonitoredDevices(devices);
+    }
+  }
 
-  // useFocusEffect(useCallback(() => {
-  //   loadAllDevices()
-  //   // clearAllDevices()
-  // }, []))
+  useFocusEffect(useCallback(() => {
+    loadAllDevices()
+    // clearAllDevices()
+  }, []))
 
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
 
-  // function handleDevicePage(deviceId: number) {
-  //   navigation.navigate('device', { deviceId: deviceId.toString() })
-  // }
+  function handleDevicePage(deviceId: any) {
+    navigation.navigate('device', { deviceId: deviceId.toString() })
+  }
 
-  // function handleAddDevice() {
-  //   navigation.navigate('addDevice')
-  // }
+  function handleAddDevice() {
+    navigation.navigate('addDevice')
+  }
 
-  // function lastVerify(date: Date) {
-  //   return formatDistance(new Date(),new Date(date) , { locale: ptBR })
-  // } 
+  function lastVerify(date: Date) {
+    return formatDistance(new Date(),new Date(date) , { locale: ptBR })
+  } 
 
   return (
     <Container>

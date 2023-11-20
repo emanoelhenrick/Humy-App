@@ -8,34 +8,34 @@ import { storageGetDevice } from "../../storage/devices/storageGetDevice";
 
 export function AddDevice() {
 
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
 
-  // const [deviceCode, setDeviceCode] = useState('')
-  // const [deviceName, setDeviceName] = useState('')
+  const [deviceCode, setDeviceCode] = useState('')
+  const [deviceName, setDeviceName] = useState('')
 
-  // async function handleAddDevice() {
+  async function handleAddDevice() {
 
-  //   if (!deviceCode) {
-  //     return Alert.alert('Código inválido','Digite o código de identificação do dispositivo.')
-  //   }
+    if (!deviceCode) {
+      return Alert.alert('Código inválido','Digite o código de identificação do dispositivo.')
+    }
 
-  //   if (!deviceName) {
-  //     return Alert.alert('Nome inválido','Digite um nome de identificação para o dispositivo.')
-  //   }
+    if (!deviceName) {
+      return Alert.alert('Nome inválido','Digite um nome de identificação para o dispositivo.')
+    }
 
-  //   const isDeviceAlreadyExists = await storageGetDevice(deviceCode)
-  //   if (isDeviceAlreadyExists) {
-  //     return Alert.alert('Já existe','O dispositivo já foi adicionado')
-  //   }
+    const isDeviceAlreadyExists = await storageGetDevice(deviceCode)
+    if (isDeviceAlreadyExists) {
+      return Alert.alert('Já existe','O dispositivo já foi adicionado')
+    }
 
-  //   // const deviceData = await fetchDevice(deviceCode)
-  //   if (!deviceData) {
-  //     return Alert.alert('Código inválido','Digite o código de identificação do dispositivo.')
-  //   }
+    const deviceData = await fetchDevice(deviceCode)
+    if (!deviceData) {
+      return Alert.alert('Código inválido','Digite o código de identificação do dispositivo.')
+    }
     
-  //   const newDevice = { name: deviceName, data: deviceData }
-  //   await addDevice(newDevice)
-  //   navigation.navigate('home')
+    const newDevice = { name: deviceName, data: deviceData }
+    await addDevice(newDevice)
+    navigation.navigate('home')
   }
 
   return (

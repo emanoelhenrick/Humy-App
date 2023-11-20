@@ -12,45 +12,45 @@ type RouteParams = {
 }
 
 export function DevicePage() {
-  // const [deviceData, setDeviceData] = useState<StorageData>()
-  // const navigation = useNavigation()
-  // function handleGoBack() {
-  //   navigation.goBack()
-  // }
+  const [deviceData, setDeviceData] = useState<StorageData>()
+  const navigation = useNavigation()
+  function handleGoBack() {
+    navigation.goBack()
+  }
 
-  // const route = useRoute()
-  // const { deviceId } = route.params as RouteParams
+  const route = useRoute()
+  const { deviceId } = route.params as RouteParams
 
-  // async function loadDevice() {
-  //   const device = await storageGetDevice(deviceId)
-  //   if (device) return setDeviceData(device)
-  //   return navigation.goBack()
-  // }
+  async function loadDevice() {
+    const device = await storageGetDevice(deviceId)
+    if (device) return setDeviceData(device)
+    return navigation.goBack()
+  }
 
-  // useFocusEffect(useCallback(() => {
-  //   loadDevice()
-  // }, []))
+  useFocusEffect(useCallback(() => {
+    loadDevice()
+  }, []))
 
-  // async function handleRemoveDevice() {
-  //   Alert.alert('Remover',`Tem certeza que deseja remover o dispositivo ${deviceData?.name}`,
-  //     [
-  //       {
-  //         text: 'Sim',
-  //         onPress: async () => { await removeDevice(deviceId); navigation.navigate('home') }
-  //       },
-  //       {
-  //         text: 'Não',
-  //       }
-  //     ]
-  //   )
+  async function handleRemoveDevice() {
+    Alert.alert('Remover',`Tem certeza que deseja remover o dispositivo ${deviceData?.name}`,
+      [
+        {
+          text: 'Sim',
+          onPress: async () => { await removeDevice(deviceId); navigation.navigate('home') }
+        },
+        {
+          text: 'Não',
+        }
+      ]
+    )
     
-  // }
+  }
 
-  // if (!deviceData) return
-  // const fields = deviceData.data.feeds
-  // const humidity = fields[fields.length -1].field1
-  // const maxPercent = Math.max(...fields.map(field => field.field1)) 
-  // const minPercent = Math.min(...fields.map(field => field.field1))
+  if (!deviceData) return
+  const fields = deviceData.data.feeds
+  const humidity = fields[fields.length -1].field1
+  const maxPercent = Math.max(...fields.map(field => field.field1)) 
+  const minPercent = Math.min(...fields.map(field => field.field1))
   
   return (
     <Container>
@@ -66,7 +66,7 @@ export function DevicePage() {
       <Title>humy</Title>
       </Header>
       
-      <Subtitle>{deviceData?.name}</Subtitle>
+      <Subtitle>{deviceData.name}</Subtitle>
       
       <CardContainer>
         <View>
@@ -93,7 +93,7 @@ export function DevicePage() {
           </View>
         </CardContainerThird>
       </CardContainerSecond>
-      <TouchableOpacity onPress={async () => await handleRemoveDevice()}>
+      <TouchableOpacity onPress={handleRemoveDevice}>
         <DeleteButton>Remover dispositivo</DeleteButton>
       </TouchableOpacity>
       
