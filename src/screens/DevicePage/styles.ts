@@ -64,19 +64,19 @@ export const TitleCard = styled.Text`
   font-size: ${() => theme.FONT_SIZE.MD};
 `
 
-export const HumPercent = styled.Text`
-  color: ${() => theme.COLORS.GREEN_700};
+export const HumPercent = styled.Text<{ color: string }>`
+  color: ${(props) => props.color};
   font-size: 64px;
 `
 
 export const HumPercentSecond = styled.Text`
-  color: ${() => theme.COLORS.GREEN_700};
+  color: #b6e0c4;
   font-size: 32px;
 `
 
-export const HumHealthText = styled.Text`
+export const HumHealthText = styled.Text<{ color: string }>`
   font-size: ${() => theme.FONT_SIZE.MD};
-  color: ${() => theme.COLORS.GREEN_700};
+  color: ${(props) => props.color};
 `
 
 export const DeleteButton = styled.Text`

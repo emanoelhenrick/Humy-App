@@ -14,10 +14,15 @@ export function Home() {
   const [monitoredDevices, setMonitoredDevices] = useState<StorageData[]>([])
 
   async function loadAllDevices() {
+    await loadFromStorage()
     await updateDevices()
-    const devices = await getAllDevices()
-    if (devices) {
-      setMonitoredDevices(devices);
+    await loadFromStorage()
+
+    async function loadFromStorage() {
+      const devices = await getAllDevices()
+      if (devices) {
+        setMonitoredDevices(devices);
+      }
     }
   }
 
@@ -38,7 +43,9 @@ export function Home() {
 
   function lastVerify(date: Date) {
     return formatDistance(new Date(),new Date(date) , { locale: ptBR })
-  } 
+  }
+
+  
 
   return (
     <Container>
@@ -63,14 +70,35 @@ export function Home() {
             const deviceId = item.data.channel.id
             const lastVer = lastVerify(fields[fields.length - 1].created_at)
 
+            function idealLevel() {
+              if (humidity < 20) {
+                return {
+                  text: "Abaixo do ideal",
+                  color: "#F75A68"
+                }
+              }
+          
+              if (humidity > 60) {
+                return {
+                  text: "Acima do ideal",
+                  color: "#F75A68"
+                }
+              }
+          
+              return {
+                text: "Nível ideal",
+                color: "#26d07c"
+              }
+            }
+
             return (
             <TouchableOpacity onPress={() => handleDevicePage(deviceId)}>
               <Device key={deviceId}>
                 <View>
                   <DeviceName>{item.name}</DeviceName>
-                  <LastVerification>atualização em {lastVer}</LastVerification>
+                  <LastVerification>atualizado há {lastVer}</LastVerification>
                 </View>
-                <HumPercent>{humidity}<Percent>%</Percent></HumPercent>
+                <HumPercent color={idealLevel().color}>{humidity}<Percent>%</Percent></HumPercent>
               </Device>
             </TouchableOpacity>
           )}}

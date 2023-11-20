@@ -51,19 +51,40 @@ export function DevicePage() {
   const humidity = fields[fields.length -1].field1
   const maxPercent = Math.max(...fields.map(field => field.field1)) 
   const minPercent = Math.min(...fields.map(field => field.field1))
+
+  function idealLevel() {
+    if (humidity < 20) {
+      return {
+        text: "Abaixo do ideal",
+        color: "#F75A68"
+      }
+    }
+
+    if (humidity > 60) {
+      return {
+        text: "Acima do ideal",
+        color: "#F75A68"
+      }
+    }
+
+    return {
+      text: "Nível ideal",
+      color: "#26d07c"
+    }
+  }
   
   return (
     <Container>
       <Header>
-      <GoBack>
-        <AntDesign
-          name="left"
-          size={24}
-          color="#31cf67"
-          onPress={handleGoBack}
-        />
-      </GoBack>
-      <Title>humy</Title>
+        <GoBack>
+          <AntDesign
+            name="left"
+            size={24}
+            color="#26d07c"
+            onPress={handleGoBack}
+          />
+        </GoBack>
+        <Title>humy</Title>
       </Header>
       
       <Subtitle>{deviceData.name}</Subtitle>
@@ -71,10 +92,10 @@ export function DevicePage() {
       <CardContainer>
         <View>
           <TitleCard>Humidade atual</TitleCard>
-          <HumPercent>{humidity}%</HumPercent>
+          <HumPercent color={idealLevel().color}>{humidity}%</HumPercent>
         </View>
         <View>
-          <HumHealthText>Nível ideal</HumHealthText>
+          <HumHealthText color={idealLevel().color}>{idealLevel().text}</HumHealthText>
         </View>
       </CardContainer>
 

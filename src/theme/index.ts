@@ -2,7 +2,7 @@ export const theme = {
   COLORS: {
     WHITE: '#FFF',
 
-    GREEN_700: '#31cf67',
+    GREEN_700: '#26d07c',
     GREEN_500: '#00B37E',
 
     RED: '#F75A68',

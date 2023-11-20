@@ -52,8 +52,8 @@ export const LastVerification = styled.Text`
   font-size: ${() => theme.FONT_SIZE.SM};
 `
 
-export const HumPercent = styled.Text`
-  color: ${() => theme.COLORS.GREEN_700};
+export const HumPercent = styled.Text<{ color: string }>`
+  color: ${(props) => props.color};
   font-size: 32px;
 `
 
